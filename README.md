@@ -11,14 +11,15 @@ SignIn page<br>
 Registration Page<br>
 Chat page<br>
 <br><br>
-As flutter allows you to build native app;ications, this chat application is compatible with Android, Ios and the Web.<br>
+# Working
+As flutter allows you to build native app;ications, this chat application is compatible with Android, Ios and web applications.<br>
 The application application allows you to register a new user using the Registration page, or signIn as an existing user. The signIn methods can be changed from firebase console. Firebase also authenticates the user upon login.<br><br>
 
 When a user Sends a message, the text, users name and the timestamp is sent to the firebase collection. <br>
 The receiver will receive the messages in order of their timestamp. 
 
 
-# Technologies<br>
+# Technologies Used<br>
 **Flutter** - open-source UI software development kit.<br>
 **Firebase** - provides a real-time database and back-end as a service.<br>
 **Dart** - Programming language for flutter apps
