@@ -17,7 +17,7 @@ The application application allows you to register a new user using the Registra
 
 When a user Sends a message, the text, users name and the timestamp is sent to the firebase collection. <br>
 The receiver will receive the messages in order of their timestamp. 
-
+The project code is present in lib\main.dart
 
 # Technologies Used<br>
 **Flutter** - open-source UI software development kit.<br>
