@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       routes: {                                                                 // Routes assigned to allow navigation between pages
         MyHomePage.id: (context) => MyHomePage(),
         SignIn.id: (context) => SignIn(),
-        Reg.id: (context) => Reg(),
         Chat.id: (context) => Chat(),
       },
       debugShowCheckedModeBanner: false,
@@ -383,92 +382,3 @@ class ChatMessage extends StatelessWidget{
   }
 }
 
-
-/// Registration class allows a user to register using an Email-id and password
-/// Similar to SignIn class, only difference is with firebase syntax
-class Reg extends StatefulWidget {
-  static const String id = "Register";
-  @override
-  RegState createState() => RegState();
-}
-
-
-
-class RegState extends State<Reg> {
-  String email;
-  String password;
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  Future<void> register() async {                                               //Syntax to communicate with firebase
-    FirebaseUser user = await _auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-
-    Navigator.push(context, MaterialPageRoute(
-      builder: (context) => Chat(user: user),
-    ),
-    );
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Hero(
-      tag: "title",
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Dash Registration"),
-          backgroundColor: Colors.deepPurple,
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: 250,
-                  height: 50,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "E-mail",
-                      icon: Icon(Icons.email),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                    autofocus: false,
-                    onChanged: (value) => email = value,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 5.0),
-            Container(
-              width: 250,
-              height: 50,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Password",
-                  icon: Icon(Icons.security),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                ),
-                obscureText: true,
-                onChanged: (value) => password = value,
-              ),
-            ),
-            SizedBox(height: 20.0,),
-            Button(
-              text: "Create",
-              method: () async{
-                await register();
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
