@@ -19,7 +19,7 @@ The project code is present in lib\main.dart
 **Firebase** - provides a real-time database and back-end as a service.<br>
 **Dart** - Programming language for flutter apps
 <br><br>
-Refrences:<br>
+# Refrences:<br>
 https://www.youtube.com/watch?v=1bNME5FWWXk<br>
 https://flutter.dev/docs<br>
 https://firebase.google.com/docs/firestore/using-console<br>
