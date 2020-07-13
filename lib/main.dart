@@ -43,7 +43,6 @@ class MyHomePage extends StatelessWidget {
           leading: Image.asset("assets/logo.png"),
           backgroundColor: Colors.deepPurple,
         ),
-
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -51,7 +50,6 @@ class MyHomePage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -201,7 +199,6 @@ class SignInState extends State<SignIn> {
           ),
       ),
     );
-
   }
 }
 
@@ -239,10 +236,7 @@ class ChatState extends State<Chat> {
       );
       _textEditingController.clear();
     }
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
