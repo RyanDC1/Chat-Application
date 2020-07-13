@@ -28,7 +28,7 @@ https://medium.com/flutter-community/flutter-raisedbutton-cookbook-7c3d4a82b26f 
 https://www.youtube.com/watch?v=DqJ_KjFzL9I&feature=youtu.be<br>
 
 A few screenshots of the application.
-# Screenshots
+# Screenshots 
 
 ![](https://github.com/RyanDC1/Chat-Application/blob/master/Screenshots/1.jpg)     ![](https://github.com/RyanDC1/Chat-Application/blob/master/Screenshots/2.jpg)
     ![](https://github.com/RyanDC1/Chat-Application/blob/master/Screenshots/3.jpg)   ![](https://github.com/RyanDC1/Chat-Application/blob/master/Screenshots/4.jpg)
