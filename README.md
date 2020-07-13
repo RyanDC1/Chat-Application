@@ -8,7 +8,7 @@ Firebase provides real-time database service. The chat application communicates 
 
 # Working
 As flutter allows you to build native applications, this chat application is compatible with Android, Ios and web applications.<br>
-The signIn methods can be changed from firebase console. Firebase also authenticates the user upon login.<br><br>
+The signIn methods can be changed from firebase console. Firebase also authenticates the user upon login. The registration class is similar to the signin class and only differs in firebase syntax to create a new user using email-id and password.<br><br>
 
 When a user Sends a message, the text, users name and the timestamp is sent to the firebase collection. <br>
 The receiver will receive the messages in order of their timestamp. 
