@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {                                                                 // Routes assigned to allow navigation between pages
         MyHomePage.id: (context) => MyHomePage(),
         SignIn.id: (context) => SignIn(),
+        Reg.id: (context) => Reg(),
         Chat.id: (context) => Chat(),
       },
       debugShowCheckedModeBanner: false,
@@ -224,7 +225,8 @@ class ChatState extends State<Chat> {
 
   Future<void> callback() async{
     DateTime date = DateTime.now();
-    String d_time = "${date.hour}:${date.minute}:${date.second}";
+    String time = "${date.hour}:${date.minute}";
+    String d_time = date.toString();
     if(_textEditingController.text.length > 0){
       await _firestore.collection('message').add(                               // Add messages to firestore
           {
@@ -232,6 +234,7 @@ class ChatState extends State<Chat> {
             'from': widget.user.email.replaceAll(RegExp(r"\@[^]*"), ""
             ).sentenceCase,
             'date': d_time,
+            'time': time
           }
       );
       _textEditingController.clear();
@@ -249,9 +252,7 @@ class ChatState extends State<Chat> {
         title: Text("Dash chat"),
         backgroundColor: Colors.deepPurple,
       ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
           children: <Widget>[
             Expanded(
               child: StreamBuilder<QuerySnapshot>(                                      // Streambuilder will obtain all the messages from firestore collection
@@ -259,7 +260,6 @@ class ChatState extends State<Chat> {
                 builder: (context, snapshot){
                   if(!snapshot.hasData)
                     return Text('Loading...');
-
                   List<DocumentSnapshot> documents = snapshot.data.documents;
                   List<Widget> messages = documents.map((doc) => ChatMessage(
                     from: doc.data['from'],
@@ -267,7 +267,7 @@ class ChatState extends State<Chat> {
                     me: widget.user.email.replaceAll(RegExp(r"\@[^]*"), ""
                     ).sentenceCase == doc.data['from'],
                     date: doc.data['date'],
-
+                    time: doc.data['time'],
                   )).toList();
                   return ListView(
                     children: <Widget>[...messages],
@@ -313,7 +313,6 @@ class ChatState extends State<Chat> {
             )
           ],
         ),
-      ),
     );
   }
 }
@@ -347,9 +346,10 @@ class ChatMessage extends StatelessWidget{
   final String from;
   final String text;
   final String date;
+  final String time;
   final bool me;
 
-  const ChatMessage({Key key, this.from, this.text, this.me, this.date}) : super(key: key);
+  const ChatMessage({Key key, this.from, this.text, this.me, this.date, this.time}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -373,7 +373,7 @@ class ChatMessage extends StatelessWidget{
               child: Text(text),
             ),
           ),
-          Text(date,
+          Text(time,
             style: TextStyle(fontSize: 12),
           ),
         ],
@@ -382,3 +382,92 @@ class ChatMessage extends StatelessWidget{
   }
 }
 
+
+/// Registration class allows a user to register using an Email-id and password
+/// Similar to SignIn class, only difference is with firebase syntax
+class Reg extends StatefulWidget {
+  static const String id = "Register";
+  @override
+  RegState createState() => RegState();
+}
+
+
+
+class RegState extends State<Reg> {
+  String email;
+  String password;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  Future<void> register() async {                                               //Syntax to communicate with firebase
+    FirebaseUser user = await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) => Chat(user: user),
+    ),
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: "title",
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Dash Registration"),
+          backgroundColor: Colors.deepPurple,
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: 250,
+                  height: 50,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: "E-mail",
+                      icon: Icon(Icons.email),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                    autofocus: false,
+                    onChanged: (value) => email = value,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 5.0),
+            Container(
+              width: 250,
+              height: 50,
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  icon: Icon(Icons.security),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+                obscureText: true,
+                onChanged: (value) => password = value,
+              ),
+            ),
+            SizedBox(height: 20.0,),
+            Button(
+              text: "Create",
+              method: () async{
+                await register();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
