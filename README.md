@@ -20,11 +20,12 @@ The project code is present in lib\main.dart
 **Dart** - Programming language for flutter apps
 <br><br>
 # Refrences:<br>
-https://www.youtube.com/watch?v=1bNME5FWWXk<br>
+https://www.youtube.com/watch?v=1bNME5FWWXk -Author: Tensor Programming<br>
 https://flutter.dev/docs<br>
 https://firebase.google.com/docs/firestore/using-console<br>
-https://medium.com/jlouage/container-de5b0d3ad184<br>
-https://medium.com/flutter-community/flutter-raisedbutton-cookbook-7c3d4a82b26f<br>
+https://medium.com/jlouage/container-de5b0d3ad184 -Author: Julien Louage<br>
+https://medium.com/flutter-community/flutter-raisedbutton-cookbook-7c3d4a82b26f Author: Aneesh Jose<br>
+https://www.youtube.com/watch?v=DqJ_KjFzL9I&feature=youtu.be<br>
 
 A few screenshots of the application.
 # Screenshots
