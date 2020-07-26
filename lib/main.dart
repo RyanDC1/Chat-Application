@@ -203,7 +203,7 @@ class SignInState extends State<SignIn> {
 }
 
 
-/// Chat class, handles message transfer, and display of messages
+/// Chat class, handles message transfer, and display of 
 class Chat extends StatefulWidget {
   static const String id = "Chat";
   final FirebaseUser user;
@@ -225,7 +225,7 @@ class ChatState extends State<Chat> {
     String time = "${date.hour}:${date.minute}";
     String d_time = date.toString();
     if(_textEditingController.text.length > 0){
-      await _firestore.collection('message').add(                               // Add messages to firestore
+      await _firestore.collection('messages').add(                               // Add messages to firestore
           {
             'text': _textEditingController.text,
             'from': widget.user.email.replaceAll(RegExp(r"\@[^]*"), ""
@@ -250,7 +250,7 @@ class ChatState extends State<Chat> {
           children: <Widget>[
             Expanded(
               child: StreamBuilder<QuerySnapshot>(                                      // Streambuilder will obtain all the messages from firestore collection
-                stream: _firestore.collection('message').orderBy('date').snapshots(),    // Syntax for obtaining data from firestore collection
+                stream: _firestore.collection('messages').orderBy('date').snapshots(),    // Syntax for obtaining data from firestore collection
                 builder: (context, snapshot){
                   if(!snapshot.hasData)
                     return Text('Loading...');
