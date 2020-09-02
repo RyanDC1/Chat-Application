@@ -1,3 +1,5 @@
+Note: API key required
+
 # Dash chat 
 A chatapp in flutter using firebase API.
 # Aim
